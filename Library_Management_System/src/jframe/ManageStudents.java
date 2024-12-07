@@ -155,6 +155,49 @@ public class ManageStudents extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbl_bookDetails.getModel();
         model.setRowCount(0);
     }
+    // METHOD TO SORT STUDENT DETAILS
+    public void sortStudentDetails(String column, String order) {
+        int columnIndex = 0;
+        switch (column) {
+            case "Student ID":
+                columnIndex = 0;
+                break;
+            case "Name":
+                columnIndex = 1;
+                break;
+            case "College":
+                columnIndex = 2;
+                break;
+            case "Program":
+                columnIndex = 3;
+                break;
+        }
+
+        Object[][] data = new Object[model.getRowCount()][model.getColumnCount()];
+        for (int i = 0; i < model.getRowCount(); i++) {
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                data[i][j] = model.getValueAt(i, j);
+            }
+        }
+
+        // Insertion Sort
+        for (int i = 1; i < data.length; i++) {
+            Object[] key = data[i];
+            int j = i - 1;
+
+            while (j >= 0 && ((order.equals("Ascending") && ((Comparable) key[columnIndex]).compareTo(data[j][columnIndex]) < 0) ||
+                              (order.equals("Descending") && ((Comparable) key[columnIndex]).compareTo(data[j][columnIndex]) > 0))) {
+                data[j + 1] = data[j];
+                j--;
+            }
+            data[j + 1] = key;
+        }
+
+        clearTable();
+        for (Object[] row : data) {
+            model.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -363,7 +406,7 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         jPanel1.add(combo_program, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 260, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 830));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 870));
 
         jPanel3.setBackground(new java.awt.Color(255, 248, 232));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -382,7 +425,7 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 30, 30));
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 103, 42));
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 103, 42));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 248, 232));
 
@@ -407,14 +450,14 @@ public class ManageStudents extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbl_bookDetails);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 710, 370));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 910, 490));
 
         jLabel1.setBackground(new java.awt.Color(0, 112, 192));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Student_Male_100px.png"))); // NOI18N
         jLabel1.setText("Manage Students");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 380, 120));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 380, 120));
 
         jPanel5.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -429,7 +472,7 @@ public class ManageStudents extends javax.swing.JFrame {
             .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 370, 5));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 370, 5));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -468,9 +511,9 @@ public class ManageStudents extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/setting.png"))); // NOI18N
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 30, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 830));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 870));
 
-        setSize(new java.awt.Dimension(1370, 824));
+        setSize(new java.awt.Dimension(1541, 861));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -577,7 +620,9 @@ public class ManageStudents extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_programActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String selectedColumn = jComboBox2.getSelectedItem().toString();
+        String selectedOrder = jComboBox1.getSelectedItem().toString();
+        sortStudentDetails(selectedColumn, selectedOrder);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
