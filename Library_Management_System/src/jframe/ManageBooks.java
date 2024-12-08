@@ -153,6 +153,50 @@ public class ManageBooks extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbl_bookDetails.getModel();
         model.setRowCount(0);
     }
+    
+    // METHOD TO SORT STUDENT DETAILS
+    public void sortBookDetails(String column, String order) {
+        int columnIndex = 0;
+        switch (column) {
+            case "Book ID":
+                columnIndex = 0;
+                break;
+            case "Name":
+                columnIndex = 1;
+                break;
+            case "Author":
+                columnIndex = 2;
+                break;
+            case "Quantity":
+                columnIndex = 3;
+                break;
+        }
+
+        Object[][] data = new Object[model.getRowCount()][model.getColumnCount()];
+        for (int i = 0; i < model.getRowCount(); i++) {
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                data[i][j] = model.getValueAt(i, j);
+            }
+        }
+
+        // Insertion Sort
+        for (int i = 1; i < data.length; i++) {
+            Object[] key = data[i];
+            int j = i - 1;
+
+            while (j >= 0 && ((order.equals("Ascending") && ((Comparable) key[columnIndex]).compareTo(data[j][columnIndex]) < 0) ||
+                              (order.equals("Descending") && ((Comparable) key[columnIndex]).compareTo(data[j][columnIndex]) > 0))) {
+                data[j + 1] = data[j];
+                j--;
+            }
+            data[j + 1] = key;
+        }
+
+        clearTable();
+        for (Object[] row : data) {
+            model.addRow(row);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,21 +211,21 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        txt_bookId = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txt_bookName = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        txt_authorName = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txt_quantity = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         rSMaterialButtonCircle1 = new rojerusan.RSMaterialButtonCircle();
         rSMaterialButtonCircle2 = new rojerusan.RSMaterialButtonCircle();
         rSMaterialButtonCircle3 = new rojerusan.RSMaterialButtonCircle();
+        jLabel11 = new javax.swing.JLabel();
+        txt_authorName = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txt_quantity = new javax.swing.JTextField();
+        txt_bookId = new javax.swing.JTextField();
+        txt_bookName = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -189,13 +233,12 @@ public class ManageBooks extends javax.swing.JFrame {
         tbl_bookDetails = new rojerusan.RSTableMetro();
         jLabel1 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jLabel17 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -227,38 +270,10 @@ public class ManageBooks extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 40));
 
-        txt_bookId.setBackground(new java.awt.Color(184, 0, 31));
-        txt_bookId.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        txt_bookId.setForeground(new java.awt.Color(153, 153, 153));
-        txt_bookId.setText("Enter Book ID");
-        txt_bookId.setToolTipText("");
-        txt_bookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_bookId.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_bookIdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_bookIdFocusLost(evt);
-            }
-        });
-        txt_bookId.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
-            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
-            }
-            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
-                txt_bookIdAncestorResized(evt);
-            }
-        });
-        txt_bookId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_bookIdActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 260, 40));
-
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Enter Book ID:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 120, 30));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,34 +287,45 @@ public class ManageBooks extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Enter Book name:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 140, 30));
-
-        txt_bookName.setBackground(new java.awt.Color(184, 0, 31));
-        txt_bookName.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        txt_bookName.setForeground(new java.awt.Color(153, 153, 153));
-        txt_bookName.setText("Enter Book name");
-        txt_bookName.setToolTipText("");
-        txt_bookName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        txt_bookName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txt_bookNameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txt_bookNameFocusLost(evt);
-            }
-        });
-        txt_bookName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_bookNameActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txt_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 260, 40));
+        jLabel10.setText("Enter Book Name:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 170, 30));
 
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Collaborator_Male_26px.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 50, 40));
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Unit_26px.png"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 50, 40));
+
+        rSMaterialButtonCircle1.setBackground(new java.awt.Color(255, 102, 0));
+        rSMaterialButtonCircle1.setText("DELETE");
+        rSMaterialButtonCircle1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonCircle1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rSMaterialButtonCircle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, 110, 60));
+
+        rSMaterialButtonCircle2.setBackground(new java.awt.Color(255, 102, 0));
+        rSMaterialButtonCircle2.setText("ADD");
+        rSMaterialButtonCircle2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonCircle2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rSMaterialButtonCircle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 110, 60));
+
+        rSMaterialButtonCircle3.setBackground(new java.awt.Color(255, 102, 0));
+        rSMaterialButtonCircle3.setText("UPDATE");
+        rSMaterialButtonCircle3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSMaterialButtonCircle3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rSMaterialButtonCircle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 110, 60));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -353,39 +379,56 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jPanel1.add(txt_quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 260, 40));
 
-        jLabel7.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Unit_26px.png"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 50, 40));
-
-        rSMaterialButtonCircle1.setBackground(new java.awt.Color(255, 102, 0));
-        rSMaterialButtonCircle1.setText("DELETE");
-        rSMaterialButtonCircle1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonCircle1ActionPerformed(evt);
+        txt_bookId.setBackground(new java.awt.Color(184, 0, 31));
+        txt_bookId.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        txt_bookId.setForeground(new java.awt.Color(153, 153, 153));
+        txt_bookId.setText("Enter Book ID");
+        txt_bookId.setToolTipText("");
+        txt_bookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+        txt_bookId.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_bookIdFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_bookIdFocusLost(evt);
             }
         });
-        jPanel1.add(rSMaterialButtonCircle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 570, 110, 60));
-
-        rSMaterialButtonCircle2.setBackground(new java.awt.Color(255, 102, 0));
-        rSMaterialButtonCircle2.setText("ADD");
-        rSMaterialButtonCircle2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonCircle2ActionPerformed(evt);
+        txt_bookId.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+                txt_bookIdAncestorResized(evt);
             }
         });
-        jPanel1.add(rSMaterialButtonCircle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 570, 110, 60));
-
-        rSMaterialButtonCircle3.setBackground(new java.awt.Color(255, 102, 0));
-        rSMaterialButtonCircle3.setText("UPDATE");
-        rSMaterialButtonCircle3.addActionListener(new java.awt.event.ActionListener() {
+        txt_bookId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rSMaterialButtonCircle3ActionPerformed(evt);
+                txt_bookIdActionPerformed(evt);
             }
         });
-        jPanel1.add(rSMaterialButtonCircle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 570, 110, 60));
+        jPanel1.add(txt_bookId, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 260, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 830));
+        txt_bookName.setBackground(new java.awt.Color(184, 0, 31));
+        txt_bookName.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        txt_bookName.setForeground(new java.awt.Color(153, 153, 153));
+        txt_bookName.setText("Enter Book name");
+        txt_bookName.setToolTipText("");
+        txt_bookName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+        txt_bookName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txt_bookNameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txt_bookNameFocusLost(evt);
+            }
+        });
+        txt_bookName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_bookNameActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 260, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 870));
 
         jPanel3.setBackground(new java.awt.Color(255, 248, 232));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -404,7 +447,7 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, 30, 30));
 
-        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 103, 42));
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 0, 103, 42));
 
         jScrollPane2.setBackground(new java.awt.Color(255, 248, 232));
 
@@ -414,7 +457,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Book ID", "Book Name", "Book Author", "Quantity"
+                "Book ID", "Name", "Author", "Quantity"
             }
         ));
         tbl_bookDetails.setColorBackgoundHead(new java.awt.Color(153, 0, 0));
@@ -429,14 +472,14 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tbl_bookDetails);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 760, 370));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 910, 490));
 
         jLabel1.setBackground(new java.awt.Color(0, 112, 192));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Books_52px_1.png"))); // NOI18N
-        jLabel1.setText("MANAGE BOOKS");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 310, 70));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/books (1).png"))); // NOI18N
+        jLabel1.setText("      MANAGE BOOKS");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 450, 120));
 
         jPanel5.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -444,36 +487,14 @@ public class ManageBooks extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 330, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 370, 5));
-
-        jLabel3.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/filter.png"))); // NOI18N
-        jLabel3.setText("Sort By:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 90, 30));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book ID", "Book Name", "Book Author", "Quantity" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 150, 30));
-
-        jLabel2.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sort2.png"))); // NOI18N
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 190, 30, 30));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 150, 30));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 330, 5));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -484,100 +505,39 @@ public class ManageBooks extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 180, 90, 30));
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 90, 30));
 
-        jLabel17.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/setting.png"))); // NOI18N
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 30, 30));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book ID", "Name", "Author", "Quantity" }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 180, 150, 30));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascending", "Descending" }));
+        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 150, 30));
 
         jLabel15.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sorting.png"))); // NOI18N
-        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 30, 30));
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 30, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 830));
+        jLabel16.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("Sort By:");
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 60, 30));
 
-        setSize(new java.awt.Dimension(1370, 824));
+        jLabel17.setFont(new java.awt.Font("Roboto", 2, 15)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/setting.png"))); // NOI18N
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 30, 30));
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 870));
+
+        setSize(new java.awt.Dimension(1541, 861));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_bookIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusGained
-        // TODO add your handling code here:
-        if (txt_bookId.getText().equals("Enter Book ID")) {
-            txt_bookId.setText(""); // Clear the placeholder
-            txt_bookId.setForeground(Color.white); // Set the text color to black (or any visible color)
-        }
-    }//GEN-LAST:event_txt_bookIdFocusGained
-
-    private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
-        if (txt_bookId.getText().isEmpty()) {
-            txt_bookId.setText("Enter Book ID");
-            txt_bookId.setForeground(Color.GRAY);
-        }
-    }//GEN-LAST:event_txt_bookIdFocusLost
-
-    private void txt_bookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookIdActionPerformed
-
-    private void txt_bookNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookNameFocusGained
-        if (txt_bookName.getText().equals("Enter Book name")) {
-            txt_bookName.setText(""); // Clear the placeholder
-            txt_bookName.setForeground(Color.white); // Set the text color to black (or any visible color)
-        }
-    }//GEN-LAST:event_txt_bookNameFocusGained
-
-    private void txt_bookNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookNameFocusLost
-        if (txt_bookName.getText().isEmpty()) {
-            txt_bookName.setText("Enter Book name");
-            txt_bookName.setForeground(Color.GRAY);
-        }
-    }//GEN-LAST:event_txt_bookNameFocusLost
-
-    private void txt_bookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookNameActionPerformed
-
-    private void txt_authorNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_authorNameFocusGained
-        if (txt_authorName.getText().equals("Enter Author name")) {
-            txt_authorName.setText("");
-            txt_authorName.setForeground(Color.white);
-        }
-    }//GEN-LAST:event_txt_authorNameFocusGained
-
-    private void txt_authorNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_authorNameFocusLost
-        if (txt_authorName.getText().isEmpty()) {
-            txt_authorName.setText("Enter Author name");
-            txt_authorName.setForeground(Color.GRAY);
-        }
-    }//GEN-LAST:event_txt_authorNameFocusLost
-
-    private void txt_authorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_authorNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_authorNameActionPerformed
-
-    private void txt_quantityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quantityFocusGained
-        if (txt_quantity.getText().equals("Enter Quantity")) {
-            txt_quantity.setText(""); 
-            txt_quantity.setForeground(Color.white);
-        }
-    }//GEN-LAST:event_txt_quantityFocusGained
-
-    private void txt_quantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quantityFocusLost
-        if (txt_quantity.getText().isEmpty()) {
-            txt_quantity.setText("Enter Quantity");
-            txt_quantity.setForeground(Color.GRAY);
-        }
-    }//GEN-LAST:event_txt_quantityFocusLost
-
-    private void txt_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quantityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_quantityActionPerformed
-
-    private void txt_bookIdAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txt_bookIdAncestorResized
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_bookIdAncestorResized
 
     private void rSMaterialButtonCircle1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle1ActionPerformed
         if(deleteBook() == true){
@@ -633,18 +593,95 @@ public class ManageBooks extends javax.swing.JFrame {
 
         txt_quantity.setText(model.getValueAt(rowNo, 3).toString());
         txt_quantity.setForeground(Color.white);
-
-
-        
+       
     }//GEN-LAST:event_tbl_bookDetailsMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String selectedColumn = jComboBox2.getSelectedItem().toString();
+        String selectedOrder = jComboBox1.getSelectedItem().toString();
+        sortBookDetails(selectedColumn, selectedOrder);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void txt_authorNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_authorNameFocusGained
+        if (txt_authorName.getText().equals("Enter Author name")) {
+            txt_authorName.setText("");
+            txt_authorName.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_txt_authorNameFocusGained
+
+    private void txt_authorNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_authorNameFocusLost
+        if (txt_authorName.getText().isEmpty()) {
+            txt_authorName.setText("Enter Author name");
+            txt_authorName.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txt_authorNameFocusLost
+
+    private void txt_authorNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_authorNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_txt_authorNameActionPerformed
+
+    private void txt_quantityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quantityFocusGained
+        if (txt_quantity.getText().equals("Enter Quantity")) {
+            txt_quantity.setText("");
+            txt_quantity.setForeground(Color.white);
+        }
+    }//GEN-LAST:event_txt_quantityFocusGained
+
+    private void txt_quantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_quantityFocusLost
+        if (txt_quantity.getText().isEmpty()) {
+            txt_quantity.setText("Enter Quantity");
+            txt_quantity.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txt_quantityFocusLost
+
+    private void txt_quantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_quantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_quantityActionPerformed
+
+    private void txt_bookIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusGained
+        // TODO add your handling code here:
+        if (txt_bookId.getText().equals("Enter Book ID")) {
+            txt_bookId.setText(""); // Clear the placeholder
+            txt_bookId.setForeground(Color.white); // Set the text color to black (or any visible color)
+        }
+    }//GEN-LAST:event_txt_bookIdFocusGained
+
+    private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
+        if (txt_bookId.getText().isEmpty()) {
+            txt_bookId.setText("Enter Book ID");
+            txt_bookId.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txt_bookIdFocusLost
+
+    private void txt_bookIdAncestorResized(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_txt_bookIdAncestorResized
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_bookIdAncestorResized
+
+    private void txt_bookIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_bookIdActionPerformed
+
+    private void txt_bookNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookNameFocusGained
+        if (txt_bookName.getText().equals("Enter Book name")) {
+            txt_bookName.setText(""); // Clear the placeholder
+            txt_bookName.setForeground(Color.white); // Set the text color to black (or any visible color)
+        }
+    }//GEN-LAST:event_txt_bookNameFocusGained
+
+    private void txt_bookNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookNameFocusLost
+        if (txt_bookName.getText().isEmpty()) {
+            txt_bookName.setText("Enter Book name");
+            txt_bookName.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_txt_bookNameFocusLost
+
+    private void txt_bookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_bookNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -663,20 +700,23 @@ public class ManageBooks extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageStudents1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManageBooks().setVisible(true);
+                new ManageStudents1().setVisible(true);
             }
         });
     }
@@ -691,9 +731,8 @@ public class ManageBooks extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
