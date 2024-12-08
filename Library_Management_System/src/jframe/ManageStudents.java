@@ -311,7 +311,7 @@ public class ManageStudents extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Moleskine_26px.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Collaborator_Male_26px.png"))); // NOI18N
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 50, 40));
 
         jLabel10.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
@@ -342,7 +342,7 @@ public class ManageStudents extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Collaborator_Male_26px.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/university-building.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 50, 40));
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
@@ -455,9 +455,9 @@ public class ManageStudents extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 112, 192));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Student_Male_100px.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/students.png"))); // NOI18N
         jLabel1.setText(" MANAGE STUDENTS");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 50, 460, 120));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 460, 120));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
