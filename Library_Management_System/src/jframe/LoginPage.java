@@ -89,7 +89,6 @@ public void Login() {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -97,6 +96,7 @@ public void Login() {
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextField2 = new rojerusan.RSPasswordTextPlaceHolder();
+        jTextField1 = new rojerusan.RSMetroTextPlaceHolder();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -151,27 +151,6 @@ public void Login() {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Welcome,  Login to your Account");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, 240, 30));
-
-        jTextField1.setBackground(new java.awt.Color(102, 0, 0));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText(" Enter Username");
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
-            }
-        });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 260, 40));
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -230,34 +209,21 @@ public void Login() {
         });
         jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 260, 40));
 
+        jTextField1.setBackground(new java.awt.Color(102, 0, 0));
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
+        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        jTextField1.setPhColor(new java.awt.Color(255, 255, 255));
+        jTextField1.setPlaceholder("Enter Username");
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, -1, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 590, 840));
 
         setSize(new java.awt.Dimension(1000, 609));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-    if (jTextField1.getText().equals("Enter Username")) {
-    if (jTextField1.getText().equals(" Enter Username")) {
-        jTextField1.setText(""); // Clear the placeholder
-        jTextField1.setForeground(Color.white); // Set text color to white
-    }
-    }
-    }//GEN-LAST:event_jTextField1FocusGained
-
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-    if (jTextField1.getText().isEmpty()) {
-        jTextField1.setText("Enter Username"); 
-        jTextField1.setText(" Enter Username"); 
-        jTextField1.setForeground(Color.GRAY);
-    } 
-    }//GEN-LAST:event_jTextField1FocusLost
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(validateLogin()){
             Login();
@@ -333,7 +299,7 @@ public void Login() {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
+    private rojerusan.RSMetroTextPlaceHolder jTextField1;
     private rojerusan.RSPasswordTextPlaceHolder jTextField2;
     // End of variables declaration//GEN-END:variables
 

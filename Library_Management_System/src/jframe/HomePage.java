@@ -635,6 +635,7 @@ public class HomePage extends javax.swing.JFrame {
         jPanel22.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 20)); // NOI18N
         jPanel22.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel23.setBackground(new java.awt.Color(51, 51, 51));
         jPanel23.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 51, 51)));
         jPanel23.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -656,6 +657,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel31.setText("No. of Students");
         jPanel22.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 160, -1));
 
+        jPanel26.setBackground(new java.awt.Color(51, 51, 51));
         jPanel26.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 0, 0)));
         jPanel26.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -672,6 +674,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel32.setText("Issue Books");
         jPanel22.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, 120, -1));
 
+        jPanel27.setBackground(new java.awt.Color(51, 51, 51));
         jPanel27.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 51, 51)));
         jPanel27.setPreferredSize(new java.awt.Dimension(170, 90));
         jPanel27.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -689,6 +692,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel34.setText("Defaulter List");
         jPanel22.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 140, -1));
 
+        jPanel28.setBackground(new java.awt.Color(51, 51, 51));
         jPanel28.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 0, 0)));
         jPanel28.setPreferredSize(new java.awt.Dimension(170, 90));
         jPanel28.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -701,7 +705,7 @@ public class HomePage extends javax.swing.JFrame {
 
         jPanel22.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 240, 140));
 
-        tbl_studentDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_studentDetails.setBackground(new java.awt.Color(51, 51, 51));
         tbl_studentDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -729,7 +733,7 @@ public class HomePage extends javax.swing.JFrame {
         jLabel27.setText("Book Details");
         jPanel22.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 220, -1));
 
-        tbl_bookDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_bookDetails.setBackground(new java.awt.Color(51, 51, 51));
         tbl_bookDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

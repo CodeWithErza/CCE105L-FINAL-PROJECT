@@ -154,7 +154,7 @@ public class ManageBooks extends javax.swing.JFrame {
         model.setRowCount(0);
     }
     
-    // METHOD TO SORT STUDENT DETAILS
+    // METHOD TO SORT BOOK DETAILS
     public void sortBookDetails(String column, String order) {
         int columnIndex = 0;
         switch (column) {
@@ -226,6 +226,7 @@ public class ManageBooks extends javax.swing.JFrame {
         txt_quantity = new javax.swing.JTextField();
         txt_bookId = new javax.swing.JTextField();
         txt_bookName = new javax.swing.JTextField();
+        combo_department = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -239,6 +240,7 @@ public class ManageBooks extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        RunTimeField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -272,7 +274,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Enter Book ID:");
+        jLabel9.setText("Enter ISBN:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 150, 30));
 
         jLabel4.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
@@ -297,7 +299,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/icons8_Unit_26px.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/quantity.png"))); // NOI18N
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 50, 40));
 
         rSMaterialButtonCircle1.setBackground(new java.awt.Color(255, 102, 0));
@@ -329,7 +331,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Author name:");
+        jLabel11.setText("Category:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 120, 30));
 
         txt_authorName.setBackground(new java.awt.Color(184, 0, 31));
@@ -351,7 +353,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 txt_authorNameActionPerformed(evt);
             }
         });
-        jPanel1.add(txt_authorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 260, 40));
+        jPanel1.add(txt_authorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 260, 40));
 
         jLabel12.setFont(new java.awt.Font("Roboto", 0, 17)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -382,7 +384,7 @@ public class ManageBooks extends javax.swing.JFrame {
         txt_bookId.setBackground(new java.awt.Color(184, 0, 31));
         txt_bookId.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
         txt_bookId.setForeground(new java.awt.Color(153, 153, 153));
-        txt_bookId.setText("Enter Book ID");
+        txt_bookId.setText("Enter ISBN");
         txt_bookId.setToolTipText("");
         txt_bookId.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(255, 255, 255)));
         txt_bookId.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -428,6 +430,15 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jPanel1.add(txt_bookName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 260, 40));
 
+        combo_department.setFont(new java.awt.Font("Segoe UI", 0, 17)); // NOI18N
+        combo_department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Scholarly", "Non-Scholarly" }));
+        combo_department.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_departmentActionPerformed(evt);
+            }
+        });
+        jPanel1.add(combo_department, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 260, 40));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 870));
 
         jPanel3.setBackground(new java.awt.Color(255, 248, 232));
@@ -457,7 +468,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Book ID", "Name", "Author", "Quantity"
+                "ISBN", "Name", "Category", "Quantity"
             }
         ));
         tbl_bookDetails.setColorBackgoundHead(new java.awt.Color(153, 0, 0));
@@ -479,7 +490,7 @@ public class ManageBooks extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(204, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/AddNewBookIcons/books (1).png"))); // NOI18N
         jLabel1.setText("      MANAGE BOOKS");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 450, 120));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 450, 120));
 
         jPanel5.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -494,7 +505,7 @@ public class ManageBooks extends javax.swing.JFrame {
             .addGap(0, 5, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 330, 5));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 330, 5));
 
         jButton1.setBackground(new java.awt.Color(204, 0, 0));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
@@ -507,7 +518,7 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 180, 90, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book ID", "Name", "Author", "Quantity" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ISBN", "Category", "Quantity" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -532,6 +543,16 @@ public class ManageBooks extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(102, 102, 102));
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/setting.png"))); // NOI18N
         jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 30, 30));
+
+        RunTimeField.setBackground(new java.awt.Color(255, 248, 232));
+        RunTimeField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RunTimeField.setForeground(new java.awt.Color(153, 0, 0));
+        RunTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RunTimeFieldActionPerformed(evt);
+            }
+        });
+        jPanel3.add(RunTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 110, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 870));
 
@@ -644,7 +665,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
     private void txt_bookIdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusGained
         // TODO add your handling code here:
-        if (txt_bookId.getText().equals("Enter Book ID")) {
+        if (txt_bookId.getText().equals("Enter ISBN")) {
             txt_bookId.setText(""); // Clear the placeholder
             txt_bookId.setForeground(Color.white); // Set the text color to black (or any visible color)
         }
@@ -652,7 +673,7 @@ public class ManageBooks extends javax.swing.JFrame {
 
     private void txt_bookIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txt_bookIdFocusLost
         if (txt_bookId.getText().isEmpty()) {
-            txt_bookId.setText("Enter Book ID");
+            txt_bookId.setText("Enter ISBN");
             txt_bookId.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_txt_bookIdFocusLost
@@ -682,6 +703,14 @@ public class ManageBooks extends javax.swing.JFrame {
     private void txt_bookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_bookNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_bookNameActionPerformed
+
+    private void combo_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_departmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_departmentActionPerformed
+
+    private void RunTimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RunTimeFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -722,6 +751,8 @@ public class ManageBooks extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField RunTimeField;
+    private javax.swing.JComboBox<String> combo_department;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;

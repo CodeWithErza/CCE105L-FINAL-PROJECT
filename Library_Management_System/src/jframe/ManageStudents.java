@@ -240,6 +240,7 @@ public class ManageStudents extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        RunTimeField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -511,6 +512,16 @@ public class ManageStudents extends javax.swing.JFrame {
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 330, 5));
 
+        RunTimeField.setBackground(new java.awt.Color(255, 248, 232));
+        RunTimeField.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        RunTimeField.setForeground(new java.awt.Color(153, 0, 0));
+        RunTimeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RunTimeFieldActionPerformed(evt);
+            }
+        });
+        jPanel3.add(RunTimeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 10, 110, 30));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 1260, 870));
 
         setSize(new java.awt.Dimension(1541, 861));
@@ -629,6 +640,10 @@ public class ManageStudents extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
+    private void RunTimeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RunTimeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RunTimeFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -666,6 +681,7 @@ public class ManageStudents extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField RunTimeField;
     private javax.swing.JComboBox<String> combo_department;
     private javax.swing.JComboBox<String> combo_program;
     private javax.swing.JButton jButton1;
