@@ -77,25 +77,24 @@ public class HomePage extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms", "root", "");
             java.sql.Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from book_details");
-            
-            while(rs.next()){
-                String bookId = rs.getString("book_id");
+            ResultSet rs = st.executeQuery("SELECT * FROM book_details");
+
+            while (rs.next()) {
+                String isbn = rs.getString("isbn");
                 String bookName = rs.getString("book_name");
                 String author = rs.getString("author");
+                String category = rs.getString("category");
                 int quantity = rs.getInt("quantity");
-                
-                Object[] obj = {bookId, bookName, author, quantity};
+
+                Object[] obj = {isbn, bookName, author, category, quantity};
                 model = (DefaultTableModel) tbl_bookDetails.getModel();
                 model.addRow(obj);
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
+
     public void setDataToCards() {
         Statement st = null;
         ResultSet rs = null;
@@ -156,7 +155,7 @@ public class HomePage extends javax.swing.JFrame {
       
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "select book_name, count(*) as issue_count from issue_book_details group by book_id";
+            String sql = "select book_name, count(*) as issue_count from issue_book_details group by isbn";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
             
@@ -645,17 +644,17 @@ public class HomePage extends javax.swing.JFrame {
         lbl_noOfBooks.setText("10");
         jPanel23.add(lbl_noOfBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 120, -1));
 
-        jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 240, 140));
+        jPanel22.add(jPanel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 240, 140));
 
         jLabel25.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel25.setForeground(new java.awt.Color(102, 102, 102));
         jLabel25.setText("Students Details");
-        jPanel22.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, 220, -1));
+        jPanel22.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 220, -1));
 
         jLabel31.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel31.setForeground(new java.awt.Color(102, 102, 102));
         jLabel31.setText("No. of Students");
-        jPanel22.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 160, -1));
+        jPanel22.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 160, -1));
 
         jPanel26.setBackground(new java.awt.Color(51, 51, 51));
         jPanel26.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 0, 0)));
@@ -667,12 +666,12 @@ public class HomePage extends javax.swing.JFrame {
         lbl_noOfStudents.setText("10");
         jPanel26.add(lbl_noOfStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, -1));
 
-        jPanel22.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 240, 140));
+        jPanel22.add(jPanel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 240, 140));
 
         jLabel32.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(102, 102, 102));
         jLabel32.setText("Issue Books");
-        jPanel22.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, 120, -1));
+        jPanel22.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 40, 120, -1));
 
         jPanel27.setBackground(new java.awt.Color(51, 51, 51));
         jPanel27.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(255, 51, 51)));
@@ -685,12 +684,12 @@ public class HomePage extends javax.swing.JFrame {
         lbl_issueBooks.setText("10");
         jPanel27.add(lbl_issueBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 120, -1));
 
-        jPanel22.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 70, 240, 140));
+        jPanel22.add(jPanel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 240, 140));
 
         jLabel34.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(102, 102, 102));
         jLabel34.setText("Defaulter List");
-        jPanel22.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 40, 140, -1));
+        jPanel22.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 40, 140, -1));
 
         jPanel28.setBackground(new java.awt.Color(51, 51, 51));
         jPanel28.setBorder(javax.swing.BorderFactory.createMatteBorder(15, 0, 0, 0, new java.awt.Color(102, 0, 0)));
@@ -703,7 +702,7 @@ public class HomePage extends javax.swing.JFrame {
         lbl_defaulterList.setText("10");
         jPanel28.add(lbl_defaulterList, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 120, -1));
 
-        jPanel22.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 70, 240, 140));
+        jPanel22.add(jPanel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 70, 240, 140));
 
         tbl_studentDetails.setBackground(new java.awt.Color(51, 51, 51));
         tbl_studentDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -721,17 +720,17 @@ public class HomePage extends javax.swing.JFrame {
         tbl_studentDetails.setRowHeight(25);
         jScrollPane1.setViewportView(tbl_studentDetails);
 
-        jPanel22.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 590, 200));
+        jPanel22.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 640, 200));
 
         jLabel26.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel26.setForeground(new java.awt.Color(102, 102, 102));
         jLabel26.setText("No. of Books");
-        jPanel22.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, 130, -1));
+        jPanel22.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 130, -1));
 
         jLabel27.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel27.setForeground(new java.awt.Color(102, 102, 102));
         jLabel27.setText("Book Details");
-        jPanel22.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 220, -1));
+        jPanel22.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 220, -1));
 
         tbl_bookDetails.setBackground(new java.awt.Color(51, 51, 51));
         tbl_bookDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -739,7 +738,7 @@ public class HomePage extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Book ID", "Name", "Author", "Quantity"
+                "ISBN", "Name", "Author", "Category", "Quantity"
             }
         ));
         tbl_bookDetails.setColorBackgoundHead(new java.awt.Color(153, 0, 0));
@@ -749,10 +748,10 @@ public class HomePage extends javax.swing.JFrame {
         tbl_bookDetails.setRowHeight(25);
         jScrollPane2.setViewportView(tbl_bookDetails);
 
-        jPanel22.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 520, 590, 220));
+        jPanel22.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 530, 640, 220));
 
         panelPieChart.setLayout(new java.awt.BorderLayout());
-        jPanel22.add(panelPieChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 300, 440, 440));
+        jPanel22.add(panelPieChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 280, 440, 440));
 
         getContentPane().add(jPanel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 1310, 960));
 

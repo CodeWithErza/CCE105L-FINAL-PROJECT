@@ -52,7 +52,7 @@ public class ManageStudents extends javax.swing.JFrame {
                 String program = rs.getString("program");
                 
                 Object[] obj = {studentId, studentName, department, program};
-                model = (DefaultTableModel) tbl_bookDetails.getModel();
+                model = (DefaultTableModel) tbl_studentDetails.getModel();
                 model.addRow(obj);
 
 
@@ -152,7 +152,7 @@ public class ManageStudents extends javax.swing.JFrame {
     // METHOD TO CLEAR TABLE
     
     public void clearTable(){
-        DefaultTableModel model = (DefaultTableModel) tbl_bookDetails.getModel();
+        DefaultTableModel model = (DefaultTableModel) tbl_studentDetails.getModel();
         model.setRowCount(0);
     }
     // METHOD TO SORT STUDENT DETAILS
@@ -231,7 +231,7 @@ public class ManageStudents extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_bookDetails = new rojerusan.RSTableMetro();
+        tbl_studentDetails = new rojerusan.RSTableMetro();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -430,8 +430,8 @@ public class ManageStudents extends javax.swing.JFrame {
 
         jScrollPane2.setBackground(new java.awt.Color(255, 248, 232));
 
-        tbl_bookDetails.setBackground(new java.awt.Color(204, 204, 204));
-        tbl_bookDetails.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_studentDetails.setBackground(new java.awt.Color(204, 204, 204));
+        tbl_studentDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -439,17 +439,17 @@ public class ManageStudents extends javax.swing.JFrame {
                 "Student ID", "Name", "College", "Program"
             }
         ));
-        tbl_bookDetails.setColorBackgoundHead(new java.awt.Color(153, 0, 0));
-        tbl_bookDetails.setColorBordeFilas(new java.awt.Color(153, 0, 0));
-        tbl_bookDetails.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
-        tbl_bookDetails.setColorSelBackgound(new java.awt.Color(255, 51, 51));
-        tbl_bookDetails.setRowHeight(25);
-        tbl_bookDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_studentDetails.setColorBackgoundHead(new java.awt.Color(153, 0, 0));
+        tbl_studentDetails.setColorBordeFilas(new java.awt.Color(153, 0, 0));
+        tbl_studentDetails.setColorFilasBackgound2(new java.awt.Color(255, 255, 255));
+        tbl_studentDetails.setColorSelBackgound(new java.awt.Color(255, 51, 51));
+        tbl_studentDetails.setRowHeight(25);
+        tbl_studentDetails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_bookDetailsMouseClicked(evt);
+                tbl_studentDetailsMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbl_bookDetails);
+        jScrollPane2.setViewportView(tbl_studentDetails);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 910, 490));
 
@@ -609,9 +609,9 @@ public class ManageStudents extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jLabel13MouseClicked
 
-    private void tbl_bookDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_bookDetailsMouseClicked
-        int rowNo = tbl_bookDetails.getSelectedRow();
-        TableModel model = tbl_bookDetails.getModel();
+    private void tbl_studentDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_studentDetailsMouseClicked
+        int rowNo = tbl_studentDetails.getSelectedRow();
+        TableModel model = tbl_studentDetails.getModel();
         
         txt_studentId.setText(model.getValueAt(rowNo, 0).toString());
         txt_studentId.setForeground(Color.white);
@@ -620,7 +620,7 @@ public class ManageStudents extends javax.swing.JFrame {
         combo_department.setSelectedItem(model.getValueAt(rowNo,2).toString());
         combo_program.setSelectedItem(model.getValueAt(rowNo,3).toString());
        
-    }//GEN-LAST:event_tbl_bookDetailsMouseClicked
+    }//GEN-LAST:event_tbl_studentDetailsMouseClicked
 
     private void combo_departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_departmentActionPerformed
         // TODO add your handling code here:
@@ -711,7 +711,7 @@ public class ManageStudents extends javax.swing.JFrame {
     private rojerusan.RSMaterialButtonCircle rSMaterialButtonCircle1;
     private rojerusan.RSMaterialButtonCircle rSMaterialButtonCircle2;
     private rojerusan.RSMaterialButtonCircle rSMaterialButtonCircle3;
-    private rojerusan.RSTableMetro tbl_bookDetails;
+    private rojerusan.RSTableMetro tbl_studentDetails;
     private javax.swing.JTextField txt_studentId;
     private javax.swing.JTextField txt_studentName;
     // End of variables declaration//GEN-END:variables
