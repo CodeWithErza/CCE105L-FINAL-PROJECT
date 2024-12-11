@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -60,41 +61,56 @@ public class ManageBooks extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+// TO ADD BOOKS TO book_details table
+public boolean addBooks() {
+    boolean isAdded = false;
+    isbn = txt_ISBNId.getText(); 
+    bookName = txt_bookName.getText();
+    author = txt_authorName.getText();
+    category = combo_category.getSelectedItem().toString(); 
+    quantity = Integer.parseInt(txt_quantity.getText()); 
 
-        // TO ADD BOOKS TO book_details table
-        public boolean addBooks(){
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms", "root", "");
+        String sql = "INSERT INTO book_details (isbn, book_name, author, category, quantity) VALUES(?,?,?,?,?)";
+        PreparedStatement pst = con.prepareStatement(sql);
+        pst.setString(1, isbn);
+        pst.setString(2, bookName);
+        pst.setString(3, author);
+        pst.setString(4, category);
+        pst.setInt(5, quantity);
 
-            boolean isAdded = false;
-            isbn = txt_ISBNId.getText(); 
-            bookName = txt_bookName.getText();
-            author = txt_authorName.getText();
-            category = combo_category.getSelectedItem().toString(); 
-            quantity = Integer.parseInt(txt_quantity.getText()); 
+        int rowCount = pst.executeUpdate();
+        isAdded = rowCount > 0; // Set to true if the insert was successful
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_ms", "root", "");
-                String sql = "INSERT INTO book_details (isbn, book_name, author, category, quantity) VALUES(?,?,?,?,?)";
-                PreparedStatement pst = con.prepareStatement(sql);
-                pst.setString(1, isbn);
-                pst.setString(2, bookName);
-                pst.setString(3, author);
-                pst.setString(4, category);
-                pst.setInt(5, quantity);
-
-                int rowCount = pst.executeUpdate();
-
-                if (rowCount > 0) {
-                    isAdded = true;
-                } else {
-                    isAdded = false;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    } catch (java.sql.SQLIntegrityConstraintViolationException e) {
+        // Log the error and show a user-friendly message
+        System.err.println("Duplicate entry error: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Duplicate entry detected for ISBN. Please use a unique ISBN.", "Duplicate Error", JOptionPane.ERROR_MESSAGE);
+    } catch (ClassNotFoundException e) {
+        // Log the error and show a user-friendly message
+        System.err.println("Database driver error: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "Database driver not found. Please contact support.", "Driver Error", JOptionPane.ERROR_MESSAGE);
+    }catch (Exception e) {
+        // Log the error and show a generic message
+        System.err.println("Unexpected error: " + e.getMessage());
+        JOptionPane.showMessageDialog(null, "An unexpected error occurred. Please try again later.", "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        try {
+            if (con != null) {
+                con.close(); // Close the connection to free resources
             }
-            return isAdded;
+        } catch (SQLException e) {
+            // Log connection close error silently
+            System.err.println("Error closing connection: " + e.getMessage());
         }
+    }
 
+    return isAdded;
+}
+
+        
         // TO UPDATE BOOK DETAILS
         public boolean updateBook() {
             boolean isUpdated = false;
