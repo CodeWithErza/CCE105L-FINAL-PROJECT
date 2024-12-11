@@ -604,6 +604,18 @@ public class ManageBooks extends javax.swing.JFrame {
     }//GEN-LAST:event_rSMaterialButtonCircle1ActionPerformed
 
     private void rSMaterialButtonCircle2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle2ActionPerformed
+        int quantity;
+        try {
+            quantity = Integer.parseInt(txt_quantity.getText());
+            if (quantity < 0) {
+                JOptionPane.showMessageDialog(this, "Quantity cannot be negative.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                return; // Exit the method if the quantity is invalid.
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for quantity.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if the input is not a valid number.
+        }
+
         if(addBooks() == true){
             JOptionPane.showMessageDialog(this, "Book Added");
             clearTable();
@@ -614,6 +626,18 @@ public class ManageBooks extends javax.swing.JFrame {
     }//GEN-LAST:event_rSMaterialButtonCircle2ActionPerformed
 
     private void rSMaterialButtonCircle3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSMaterialButtonCircle3ActionPerformed
+        int quantity;
+        try {
+            quantity = Integer.parseInt(txt_quantity.getText());
+            if (quantity < 0) {
+                JOptionPane.showMessageDialog(this, "Quantity cannot be negative.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                return; // Exit the method if the quantity is invalid.
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid number for quantity.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method if the input is not a valid number.
+        }
+
         if(updateBook() == true){
             JOptionPane.showMessageDialog(this, "Book Updated");
             clearTable();
